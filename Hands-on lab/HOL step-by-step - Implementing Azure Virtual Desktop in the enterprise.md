@@ -159,25 +159,28 @@ In this exercise, you will be configuring [Azure AD Connect](https://docs.micros
 
     ![](media/resourcegroup.png)
 
-2. On the Resource Group page, open **WVD-RG**
+2. On the Resource Group page, open **WVD-RG** and locate the resource named **AdPubIP1** that is a Public IP address.
 
-3.  On the Infra Resource group blade, review the list of available resources. Locate the resource named **AdPubIP1** and select it. Note that the resource type should be **Public IP address**.
+    ![](media/resource.png)
+    
+3. Copy the IP address given in the right side to a safe location such as in a text editor.
 
-    ![This image shows how to find the public IP address for the domain controller VM.](images/publicip.png "Public IP address for Domain Controller VM")
+    ![This image shows how to find the public IP address for the domain controller VM.](media/publicip.png "Public IP address for Domain Controller VM")
 
-5.  On the Overview page for AdPubIP1, locate the **IP address** field. Copy the IP address to a safe location.
+5.  On your local machine, open the **RUN** dialog window, type **MSTSC** and enter.
 
-6.  On your local machine, open the **RUN** dialog window, type **MSTSC** and enter.
+    ![This image shows the Run dialog window to run MSTSC.](media/run.png "Run on Windows") 
 
-    ![This image shows the Run dialog window to run MSTSC.](images/run.png "Run on Windows") 
+6.  In the **Remote Desktop Connection** window, paste in the public IP address from the previous step and click on **Connect**.
 
-7.  In the **Remote Desktop Connection** window, paste in the public IP address from the previous step. Select **Connect**.
+    ![This image shows how the Window for Remote Desktop Connection will open to enter the public IP address for the domain controller VM.](media/remoteDesktop.png "Window for Remote Desktop Connection") 
 
-    ![This image shows how the Window for Remote Desktop Connection will open to enter the public IP address for the domain controller VM.](images/remoteDesktop.png "Window for Remote Desktop Connection") 
+7.  When prompted, sign in using the following credentials:
 
-8.  When prompted, sign in with the AD domain UPN credentials. For example, when you used the ARM template from [Before HOL setup guide](), the credentials will be something along the lines of: [adadmin\@MyADDomain.com](mailto:adadmin@MyADDomain.com) with the password: **WVD\@zureL\@b2019!**. If prompted, select **Yes** to accept the RDP certification warning.
+  * Username: **adadmin**
+  * Password: **WVD\@zureL\@b2019!**
+  * When prompted, select **Yes** to accept the RDP certification warning.
 
-    >**Note**: This is the Active Directory account from the ARM template, not the Azure AD Global Admin account. when you have trouble signing in, try typing the credentials in manually, as copy and paste may include an unnecessary space, which will cause authentication to fail.
 
 ### Task 2: Disabling IE Enhanced Security
 
@@ -187,13 +190,15 @@ To simplify tasks in this lab, we will start by disabling [IE Enhanced Security]
 
 2.  In Server Manager, select **Local Server** on the left.
 
+    ![](media/localServer.png)
+
 3.  Locate the **IE Enhanced Security Configuration** option and select **On**.
 
-    ![This image shows the Local Server properties in server manager, locate Enhanced Security configuration.](images/IEESC.png "Local Server properties within server manager") 
+    ![This image shows the Local Server properties in server manager, locate Enhanced Security configuration.](media/IEESC.png "Local Server properties within server manager") 
 
 4.  On the Internet Explorer Enhanced Security Configuration window, under **Administrators**, select the **Off** radio button and select **OK**.
 
-    ![This image shows how you select the current configuration, a new window will open that will allow you to disable the enhanced security configuration.](images/disablesecurity.png "Disable enhanced security configuration")
+    ![This image shows how you select the current configuration, a new window will open that will allow you to disable the enhanced security configuration.](media/disablesecurity.png "Disable enhanced security configuration")
 
 ### Task 3: Creating a domain admin account
 
