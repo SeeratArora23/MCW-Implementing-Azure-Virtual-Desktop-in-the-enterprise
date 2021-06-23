@@ -157,11 +157,11 @@ In this exercise, you will be configuring [Azure AD Connect](https://docs.micros
 
 1.  In Azure portal, click on **Resource groups** in the **Navigate** section.
 
-    ![](images/resourcegroup.png)
+    ![](media/resourcegroup.png)
 
-2.  On the Resource groups blade, select the resource group name that you created in the **Before the HOL** template deployment.
+2. On the Resource Group page, open **WVD-RG**
 
-4.  On the Infra Resource group blade, review the list of available resources. Locate the resource named **AdPubIP1** and select it. Note that the resource type should be **Public IP address**.
+3.  On the Infra Resource group blade, review the list of available resources. Locate the resource named **AdPubIP1** and select it. Note that the resource type should be **Public IP address**.
 
     ![This image shows how to find the public IP address for the domain controller VM.](images/publicip.png "Public IP address for Domain Controller VM")
 
