@@ -159,7 +159,7 @@ In this exercise, you will be configuring [Azure AD Connect](https://docs.micros
 
     ![](media/resourcegroup.png)
 
-2. On the Resource Group page, open **WVD-RG** and locate the resource named **AdPubIP1** that is a Public IP address.
+2. On the Resource Group page, open **AVD-RG** and locate the resource named **AdPubIP1** that is a Public IP address.
 
     ![](media/resource.png)
     
@@ -177,7 +177,7 @@ In this exercise, you will be configuring [Azure AD Connect](https://docs.micros
 
 7.  When prompted, sign in using the following credentials:
 
-  * Username: **adadmin**
+  * Username: **CONTOSO.COM\ADadmin****
   * Password: **WVD\@zureL\@b2019!**
   * When prompted, select **Yes** to accept the RDP certification warning.
 
@@ -236,47 +236,63 @@ By default, Azure AD Connect does not synchronize the built-in domain administra
 
 > **Note**: This account will be used during the host pool creation process for joining the hosts to the domain. Granting Domain Admin permissions will simplify the lab. However, any Active Directory account that has the following permissions will suffice. This can be done using [Active Directory Delegate Control](https://danielengberg.com/domain-join-permissions-delegate-active-directory/). 
  
- 
+7. Select **OK** on thw popup saying **The Add to Group  operation was successfully completed**.
+
+    ![](media/useradded.png "Add user to Domain Admins group")
+
 ### Task 4: Configuring Azure AD Connect
 
 1.  On the desktop of the domain controller, locate the icon for **Azure AD Connect** and open it.
 
-    ![This image shows the Azure AD Connect icon on the Domain controller VM desktop.](images/azureadconnect.png "Azure AD Connect desktop icon")
+    ![This image shows the Azure AD Connect icon on the Domain controller VM desktop.](media/azureadconnect.png "Azure AD Connect desktop icon")
 
-2.  Accept the license terms and privacy notice, then select continue. On the next screen select **Use express settings**. The required components will install.
+2.  Accept the license terms and privacy notice by selecting the check box and then select **Continue**. 
 
-    ![This image shows how the install wizard will take you to the Azure AD connect set up screen.](images/AzureADconnectExpressSetting.png "Azure AD connect set up screen") 
+    ![](media/accept.png "Add user to Domain Admins group")
 
-3.  On the Connect to Azure AD page, enter in the Azure AD Global Admin credentials. For example: [azadmin\@MyAADdomain.onmicrosoft.com](mailto:azadmin@MyAADdomain.onmicrosoft.com) and the correct password. Select **Next**.
+3.  On the next screen select **Use express settings**. The required components will install.
 
-    ![This image shows how after selecting "Use express settings", the next window will require you to enter your Azure Active Directory username and password.](images/adconnectazuresub.png "Azure AD Connect - Azure AD login")
-    >**Note**: This is the account associated with your Azure subscription.
+    ![This image shows how the install wizard will take you to the Azure AD connect set up screen.](media/AzureADconnectExpressSetting.png "Azure AD connect set up screen") 
 
-4.  On the Connect to AD DS page, enter in the Active Directory credentials for a Domain Admin account. For example, when you used the ARM template deployment for the domain controller, the credentials will be something along the lines of: **[[MyADDomain.com]](http://myaddomain.com/) \\ADadmin** with the password: **WVD\@zureL\@b2019!**. Select **Next**.
+4.  On the Connect to Azure AD page, enter in the Azure AD Global Admin credentials. 
+  * Username: **<inject key="AzureAdUserEmail" />**
+  * Password: **<inject key="AzureAdUserPassword" />**
+  
+    ![This image shows how after selecting "Use express settings", the next window will require you to enter your Azure Active Directory username and password.](media/adconnectazuresub.png "Azure AD Connect - Azure AD login")
+
+> **Note**: This is the account associated with your Azure subscription.
+
+5.  On the Connect to AD DS page, enter the Active Directory credentials given below for the Domain Admin account and then select **Next**:
+  * Username: **CONTOSO.COM\ADadmin**
+  * Password: **WVD@zureL@b2019!**
 
     ![This image shows the next window, where you will enter the AD DS domain and admin username and password.](images/azureadconnectdclogin.png "Azure AD Connect - Domain login")
     
-    >**Note**: When you copy and paste the password, make sure there are no trailing spaces, as that will cause the verification to fail.
+> **Note**: When you copy and paste the password, make sure there are no trailing spaces, as that will cause the verification to fail.
 
-5.  Select **Install** to start the configuration and synchronization.
+6. Select the checkbox saying **Continue without matching all UPN suffixes to verified domains**.
+
+    ![](media/continue.png "Add user to Domain Admins group")
+
+7.  Select **Install** to start the configuration and synchronization.
 
     ![This image shows the next window, where you will select the box to continue without matching all UPN suffixes and select next to continue.](images/azureadsigninconfig.png "Azure AD sign-in configuration")
 
     ![This image shows the final setup window, select the box to start the synchronization process and select install.](images/azureadready.png "Azure AD Connect Ready to configure")
 
-6.  After a few minutes, the Azure AD Connect installation will complete. Select **Exit**.
+8.  After a few minutes, the Azure AD Connect installation will complete. Select **Exit**.
 
     ![This image shows the installation is complete the Configuration complete window will be present.](images/AADCcomplete.png "The Configuration is completed window")
     
-7.  Minimize the RDP session for the domain controller and wait a few minutes for the AD accounts to be synchronized to Azure AD.
+9.  Minimize the RDP session for the domain controller and wait a few minutes for the AD accounts to be synchronized to Azure AD.
 
-8.  Sign in to the [Azure Portal](https://portal.azure.com/).
+10. Navigate to the [Azure Portal](https://portal.azure.com/). Type _Azure Active Directory_ in the search field and select **Azure Active Directory** from the list.
 
-9.  Type **Azure Active Directory** in the search field and select it from the list.
+11. On the Azure Active Directory blade, under **Manage**, select **Users**.
 
-10. On the Azure Active Directory blade, under **Manage**, select **Users**.
+    ![](media/aadusers.png "Add user to Domain Admins group")
 
-11. Review the list of user account objects and confirm the test accounts have synchronized.  
+12. Review the list of user account objects and confirm the test accounts have synchronized.  
 
     ![This image shows the list of users that you should see in Azure Active Directory that were synchronized from Active Directory with Azure AD Connect.](images/adconnectsync.png "Synchronized users list")
 
