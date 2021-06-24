@@ -292,7 +292,7 @@ By default, Azure AD Connect does not synchronize the built-in domain administra
 
     ![](media/aadusers.png "Add user to Domain Admins group")
 
-12. Review the list of user account objects and confirm the test accounts have synchronized.  
+12. Review the list of user account objects and confirm the test accounts have synchronized.
 
     ![This image shows the list of users that you should see in Azure Active Directory that were synchronized from Active Directory with Azure AD Connect.](images/adconnectsync.png "Synchronized users list")
 
@@ -321,11 +321,13 @@ It is also important to keep in mind that these groups can also originate from t
 
 ### Task 1: Creating Azure AD groups
 
-1.  Sign in to the [Azure Portal](https://portal.azure.com/).
+1.  In the Azure portal, navigate to **Azure Active Directory** select **Groups** from the left pane.
 
-2.  At the top of the page, in the **Search resources** field, type **Azure Active Directory**. Select **Azure Active Directory** from the list.
+    ![](media/newgroup1.png "Add user to Domain Admins group")
 
-3.  On the Azure Active Directory page, select **Groups** on the left and select **+ New group**.
+2.  On Groups page, select **+ New group**.
+
+    ![](media/newgroup.png "Add user to Domain Admins group")
 
 4.  On the New Group page, fill in the following options and select **Create**.
 
@@ -335,7 +337,7 @@ It is also important to keep in mind that these groups can also originate from t
 
     -    **Membership type:** Assigned
 
-    ![This image shows how to create a new security group type and provide the AVD Pooled Desktop user for the group name.](images/newGroup2.png "New Group Window")
+    ![This image shows how to create a new security group type and provide the AVD Pooled Desktop user for the group name.](media/newGroup2.png "New Group Window")
 
 5.  Select **+ New group** again, fill in the following options and select **Create**.
 
@@ -345,7 +347,7 @@ It is also important to keep in mind that these groups can also originate from t
 
     -    **Membership type:** Assigned
 
-    ![This image shows how to create a new security group type and provide the AVD Remote App All users for the group name.](images/newGroup1.png "New Group Window")
+    ![This image shows how to create a new security group type and provide the AVD Remote App All users for the group name.](media/newGroup4.png "New Group Window")
 
 6.  Select **+ New group** again, fill in the following options and select **Create**.
 
@@ -355,35 +357,37 @@ It is also important to keep in mind that these groups can also originate from t
 
     -    **Membership type:** Assigned
 
-    ![This image shows how to create a new security group type and provide the AVD Persistent Desktop user for the group name.](images/newGroup3.png "New Group Window")
+    ![This image shows how to create a new security group type and provide the AVD Persistent Desktop user for the group name.](media/newGroup3.png "New Group Window")
 
 7. Confirm that the groups have been added by going to **Azure Active Directory**, selecting **Groups**.  Scroll down to the bottom of the list of groups and the three groups that you created should be listed.
 
-    ![This image shows how to go to Azure Active Directory Groups to view the list of groups.](images/aadgroups.png "Azure Active Directory Groups")
-
-    ![This image shows where to scroll to the bottom of the list to view the three new groups that were created.](images/aadnewgroups.png "Azure Active Directory Groups")
+    ![This image shows where to scroll to the bottom of the list to view the three new groups that were created.](media/aadnewgroups.png "Azure Active Directory Groups")
 
 ### Task 2: Assign users to groups
 
 Now that the Azure AD groups are in place, you will assign users for testing. Once the groups are populated, you can leverage them for assigning access to AVD resources once they are created.
 
-1.  Sign in to the [Azure Portal](https://portal.azure.com/).
+1.  On **Groups** page, select the **AVD Persistent Desktop User** group.
 
-2.  At the top of the page, in the **Search resources** field, type **Azure Active Directory**. Select **Azure Active Directory** from the list.
+2.  Select **Members** and **+ Add Members**
 
-3.  On the **Azure Active Directory** page, select **Groups** on the left and select the **AVD Persistent Desktop User** group.
+    ![This image shows how to add members to the persistent desktop user group from within the Azure AD blade.](media/newMember.png "Azure AD blade")
 
-4.  Select **Members** and **+ Add Members**
+3.  In the search field, enter the name of the Users listed below, and click on the user to select them and add them to the group.
 
-    ![This image shows how to add members to the persistent desktop user group from within the Azure AD blade.](images/newMember.png "Azure AD blade")
+  * Bill Smith
+  * Bob Jones
+  * Jack Petersen
+  * Julia Williams
+  * Mary Phillips
+  * Sue Jackson
+  * wvd admin
 
-5.  In the search field, enter the name of a User to add **Select** to add them to the group.
+    ![This image shows the list of users that you should be adding to each of the groups.](media/aadavdusers1.png "Azure AD groups")
 
-6.  Repeat steps 4-6 for the **AVD Pooled Desktop User** and **AVD Remote App All Users** groups.
+4.  Repeat steps 4-6 for the **AVD Pooled Desktop User** and **AVD Remote App All Users** groups.
 
     At this point you have three new Azure AD groups with members assigned. Make a note of the group names and accounts you added for use later in this guide. These groups will be used to assign access to AVD application groups.
-
-    ![This image shows the list of users that you should be adding to each of the groups.](images/aadavdusers.png "Azure AD groups")
 
 
 ## Exercise 3: Create an Azure Files Share for FSLogix
@@ -414,43 +418,51 @@ In this exercise, you will be creating an Azure File share and enabling SMB acce
 
 Before you can work with an Azure file share, you need to create an Azure storage account. To create a general-purpose v2 storage account in the Azure portal, follow these steps:
 
-1.  Sign in to the [Azure Portal](https://portal.azure.com/).
+1.  In the Azure Portal, type **storage accounts** in the **Search resources** field. Select **Storage accounts** from the list.
 
-2.  At the top of the page, in the **Search resources** field, type **storage accounts**. Select **Storage accounts** from the list.
-
-    ![This image shows how to access the search menu bar, and search for storage accounts.](images/storageaccount.png "Search for storage accounts")
+    ![This image shows how to access the search menu bar, and search for storage accounts.](media/storageaccount.png "Search for storage accounts")
 
 3.  On the Storage Accounts window that appears, select **+ Add**.
 
-4.  Fill in the required parameters for the storage account. Refer to the following example for more information on the available parameters. Make a note that contains the values you provide for **Resource group** and **Storage account name**. These will be needed later in the exercise.
-
     ![This image shows how to select the Add icon to create a new storage account.](images/addstorageaccount.png "Add a storage account")
 
-    ![This image shows how to enter the information to create a new storage account.](images/createstorageaccount.png "Create a storage account")
+4.  Fill in the required parameters for the storage account as given below:
 
-5.  Select **Review + Create** to review your storage account settings and create the account.
+  - Subscription: *Select the default subscription*. 
+   
+  - Resource Group: *Select **AVD-RG** from the drop down*. 
+   
+  - Storage account name: **<inject key="Storage Account Name" />**   
+      
+  - Region: **East US**, *this should be same as the location of your resource group*.  
+   
+  - Performance: **Standard**   
+      
+  - Redundancy: **Locally-redundant storage (LRS)**
+   
+  - Click on **Review + Create**
 
-6.  Select **Create**.
+    ![This image shows how to enter the information to create a new storage account.](media/createstorageaccount.png "Create a storage account")
 
-### Task 2: Create an Azure file share
+5.  At last, Select **Create**.
 
-1.  At the top of the Azure Portal page, in the **Search resources** field, type **storage accounts**. Select **Storage accounts** from the list.
+    ![This image shows how to enter the information to create a new storage account.](media/reviewcreate.png "Create a storage account")
 
-2.  On the Storage accounts blade, select the storage account you created in Task 1.
+6.Once the deployment is ready, select **Go to resource**. This will take you to the storage account you just created.
 
-3.  On the Overview page for your Storage account, select **File shares**.
+   ![This image shows how to enter the information to create a new storage account.](media/gotoresource.png "Create a storage account")
 
-    ![This image shows that once the storage account is created, from the overview blade, to select File shares.](images/storagefileshare.png "Create a File share")
+### Task 2: Create an Azure file share 
 
-4.  On the File shares blade, select **+ File Share**.
+1.  On the **storage accounts** page, select **File shares** and select **+ File Share**.
 
-    ![This image shows that you need to select the add icon in File shares to create a new file share.](images/addfileshare.png "Add file share")
+    ![This image shows that once the storage account is created, from the overview blade, to select File shares.](media/storagefileshare.png "Create a File share")
 
-5.  Enter a Name for the new file share, enter a quota in gigabits, select **Hot** Tier, and select **Create**.
+2.  Enter a Name for the new file share, enter a quota in gigabits, select **Hot** Tier, and select **Create**.
 
-    ![This image shows how to give the file share a name and a storage quota in gigabits.](images/newfileshare.png "New File share")
+    ![This image shows how to give the file share a name and a storage quota in gigabits.](media/newfileshare.png "New File share")
     
-    >**Note**: The file share quota supports a maximum of 5,120 GiB and can be managed on the File shares blade.
+> **Note**: The file share quota supports a maximum of 5,120 GiB and can be managed on the File shares blade.
 
 ### Task 3: Enable AD authentication for your storage account
 
@@ -458,7 +470,7 @@ Before you can work with an Azure file share, you need to create an Azure storag
 
 1.  The steps in this task need to be completed from a domain joined computer. The **AzFilesHybrid** module uses the AD PowerShell module, so running from a server is preferred.
 
-    ![This image shows how to locate the PowerShell ISE icon on the VM desktop and select it to open.](images/openpowersellise.png "Open PowerShell ISE")
+    ![This image shows how to locate the PowerShell ISE icon on the VM desktop and select it to open.](media/openpowersellise.png "Open PowerShell ISE")
 
 2.  The account used in this task needs to meet the following requirements:
 
@@ -480,39 +492,39 @@ In this task, you will be completing the steps on the Domain Controller in Azure
 
 2. From the GitHub repository, select and download the AzFilesHybrid.zip file to the domain joined computer **Documents** folder.
 
-    ![This image shows that when prompted to save the file, select save as to choose the location.](images/filesaveas.png)
+    ![This image shows that when prompted to save the file, select save as to choose the location.](media/filesaveas.png)
 
-    ![This image shows that in the window that opens, you need to find the documents folder to save the file.](images/filedownload.png)
+3. From the popup in the bottom of the page, select **Save > Save as** and set the path of the downloaded zip file to **This PC > Documents**.
 
-3. After the download is complete, navigate to the file location in file explorer.
+    ![This image shows that in the window that opens, you need to find the documents folder to save the file.](media/filedownload.png)
 
-    ![This image shows how to, after going to the GitHub link to download the AzFilesHybrid file, you locate this file in the folder it was saved.](images/azfileshybridzip.png "AzFilesHybrid module zip file")
+4. After the download is complete, navigate to the file location in file explorer. Right click on the zip file and click on **Extract All**.
 
-4. Extract this file to the **Documents** folder on the local Domain controller.
+    ![This image shows how to, after going to the GitHub link to download the AzFilesHybrid file, you locate this file in the folder it was saved.](media/extractzipfile.png "AzFilesHybrid module zip file")
 
-    ![This image shows how to open the zip file and select extract all.](images/extractzipfile.png "Extract zip file to documents")
+5. Set the path to **Documents** and select **Extract**.
 
-    ![This image shows how to choose the location to extract the files within the zip file to the documents folder.](images/extractlocation.png "Extract to documents")
+    ![This image shows how to choose the location to extract the files within the zip file to the documents folder.](media/extractlocation.png "Extract to documents")
 
-5.  Open an elevated PowerShell ISE window by finding the **PowerShell ISE** icon on the desktop. Right-click on the icon and select **Run as administrator**.
+6.  Open an elevated PowerShell ISE window by finding the **PowerShell ISE** icon on the desktop. Right-click on the icon and select **Run as administrator**.
 
-    ![This image shows how to locate the PowerShell icon on the domain computer desktop, right-click and select run as administrator.](images/runasadministrator.png)
+    ![This image shows how to locate the PowerShell icon on the domain computer desktop, right-click and select run as administrator.](media/runasadministrator.png)
 
-6.  Configure the PowerShell execution policy **Unrestricted** for the current user.
+7.  Configure the PowerShell execution policy **Unrestricted** for the current user. Select **Yes to All** on **Execution Policy Change** popup.
 
     ```
      Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
     ```
 
-7.  Navigate to where you unzipped the AzFilesHybrid. For example:
+8.  Navigate to where you unzipped the AzFilesHybrid.
 
     ```
     cd C:\Users\ADAdmin\Documents\AzFilesHybrid
     ```
 
-    ![This image shows how the path to the file should be the documents folder location in file explorer.](images/filelocation.png "Documents folder path")
+    ![This image shows how the path to the file should be the documents folder location in file explorer.](media/filelocation.png "Documents folder path")
 
-8.  Install the Az PowerShell module.
+9.  Install the Az PowerShell module.
 
     ```  
     if ($PSVersionTable.PSEdition -eq 'Desktop' -and (Get-Module -Name AzureRM -ListAvailable)) {
@@ -523,13 +535,13 @@ In this task, you will be completing the steps on the Domain Controller in Azure
     }
     ```
 
-9.  Install the AzFilesHybrid module.
+10.  Install the AzFilesHybrid module.
 
     ```
     .\CopyToPSPath.ps1
     ```
 
-10. Import the AzFilesHybrid module.
+11. Import the AzFilesHybrid module.
 
     ```  
     Import-Module -Name AzFilesHybrid
@@ -537,13 +549,13 @@ In this task, you will be completing the steps on the Domain Controller in Azure
 
     ![This image shows that after running these commands, the results will look like this screenshot.](images/azimportresults.png "Command results")
     
-11. Sign in with an account that meets the prerequisites.
+12. Sign in with an account that meets the prerequisites.
 
     ```
     Connect-AzAccount
     ```
 
-12.  Create the following PowerShell variables replacing the subscription id, resource group name, and storage account with the information specific to your lab environment:
+13.  Create the following PowerShell variables replacing the subscription id, resource group name, and storage account with the information specific to your lab environment:
     
 
         ```
