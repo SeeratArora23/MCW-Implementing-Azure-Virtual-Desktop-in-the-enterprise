@@ -266,7 +266,7 @@ By default, Azure AD Connect does not synchronize the built-in domain administra
   * Username: **CONTOSO.COM\ADadmin**
   * Password: **WVD@zureL@b2019!**
 
-    ![This image shows the next window, where you will enter the AD DS domain and admin username and password.](images/azureadconnectdclogin.png "Azure AD Connect - Domain login")
+    ![This image shows the next window, where you will enter the AD DS domain and admin username and password.](media/azureadconnectdclogin.png "Azure AD Connect - Domain login")
     
 > **Note**: When you copy and paste the password, make sure there are no trailing spaces, as that will cause the verification to fail.
 
@@ -276,13 +276,13 @@ By default, Azure AD Connect does not synchronize the built-in domain administra
 
 7.  Select **Install** to start the configuration and synchronization.
 
-    ![This image shows the next window, where you will select the box to continue without matching all UPN suffixes and select next to continue.](images/azureadsigninconfig.png "Azure AD sign-in configuration")
+    ![This image shows the next window, where you will select the box to continue without matching all UPN suffixes and select next to continue.](media/azureadsigninconfig.png "Azure AD sign-in configuration")
 
-    ![This image shows the final setup window, select the box to start the synchronization process and select install.](images/azureadready.png "Azure AD Connect Ready to configure")
+    ![This image shows the final setup window, select the box to start the synchronization process and select install.](media/azureadready.png "Azure AD Connect Ready to configure")
 
 8.  After a few minutes, the Azure AD Connect installation will complete. Select **Exit**.
 
-    ![This image shows the installation is complete the Configuration complete window will be present.](images/AADCcomplete.png "The Configuration is completed window")
+    ![This image shows the installation is complete the Configuration complete window will be present.](media/AADCcomplete.png "The Configuration is completed window")
     
 9.  Minimize the RDP session for the domain controller and wait a few minutes for the AD accounts to be synchronized to Azure AD.
 
@@ -294,7 +294,7 @@ By default, Azure AD Connect does not synchronize the built-in domain administra
 
 12. Review the list of user account objects and confirm the test accounts have synchronized.
 
-    ![This image shows the list of users that you should see in Azure Active Directory that were synchronized from Active Directory with Azure AD Connect.](images/adconnectsync.png "Synchronized users list")
+    ![This image shows the list of users that you should see in Azure Active Directory that were synchronized from Active Directory with Azure AD Connect.](media/adconnectsync.png "Synchronized users list")
 
     >**Note**: It can take up to 15 minutes for the Active Directory objects to be synchronized to the Azure AD tenant.
 
@@ -424,7 +424,7 @@ Before you can work with an Azure file share, you need to create an Azure storag
 
 3.  On the Storage Accounts window that appears, select **+ Add**.
 
-    ![This image shows how to select the Add icon to create a new storage account.](images/addstorageaccount.png "Add a storage account")
+    ![This image shows how to select the Add icon to create a new storage account.](media/addstorageaccount.png "Add a storage account")
 
 4.  Fill in the required parameters for the storage account as given below:
 
@@ -488,7 +488,7 @@ In this task, you will be completing the steps on the Domain Controller in Azure
 
     **Link address**: https://github.com/Azure-Samples/azure-files-samples/releases   
 
-    ![This image shows the view of the GitHub site for Azure samples.](images/azfileshybriddownload.png "Azure samples")
+    ![This image shows the view of the GitHub site for Azure samples.](media/azfileshybriddownload.png "Azure samples")
 
 2. From the GitHub repository, select and download the AzFilesHybrid.zip file to the domain joined computer **Documents** folder.
 
