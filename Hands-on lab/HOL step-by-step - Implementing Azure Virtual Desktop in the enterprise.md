@@ -470,7 +470,7 @@ Before you can work with an Azure file share, you need to create an Azure storag
 
 1.  The steps in this task need to be completed from a domain joined computer. The **AzFilesHybrid** module uses the AD PowerShell module, so running from a server is preferred.
 
-    ![This image shows how to locate the PowerShell ISE icon on the VM desktop and select it to open.](media/openpowersellise.png "Open PowerShell ISE")
+    ![](media/openpowersellise.png)
 
 2.  The account used in this task needs to meet the following requirements:
 
@@ -488,13 +488,13 @@ In this task, you will be completing the steps on the Domain Controller in Azure
 
     **Link address**: https://github.com/Azure-Samples/azure-files-samples/releases   
 
-    ![This image shows the view of the GitHub site for Azure samples.](media/azfileshybriddownload.png "Azure samples")
-
 2. From the GitHub repository, select and download the AzFilesHybrid.zip file to the domain joined computer **Documents** folder.
 
-    ![This image shows that when prompted to save the file, select save as to choose the location.](media/filesaveas.png)
+    ![This image shows the view of the GitHub site for Azure samples.](media/azfileshybriddownload.png "Azure samples")
 
 3. From the popup in the bottom of the page, select **Save > Save as** and set the path of the downloaded zip file to **This PC > Documents**.
+
+    ![This image shows the view of the GitHub site for Azure samples.](media/saveas.png "Azure samples")
 
     ![This image shows that in the window that opens, you need to find the documents folder to save the file.](media/filedownload.png)
 
