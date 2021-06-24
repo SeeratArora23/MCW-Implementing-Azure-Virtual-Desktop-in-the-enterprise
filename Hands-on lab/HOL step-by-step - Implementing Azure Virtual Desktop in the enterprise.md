@@ -524,7 +524,7 @@ In this task, you will be completing the steps on the Domain Controller in Azure
 
     ![This image shows how the path to the file should be the documents folder location in file explorer.](media/filelocation.png "Documents folder path")
 
-9.  Install the Az PowerShell module.
+9.  Install the Az PowerShell module. Select **Yes** on **NuGet provider is required to continue** popup and select **Yes to All** on **Untrusted Repository** popup.
 
     ```  
     if ($PSVersionTable.PSEdition -eq 'Desktop' -and (Get-Module -Name AzureRM -ListAvailable)) {
@@ -535,13 +535,14 @@ In this task, you will be completing the steps on the Domain Controller in Azure
     }
     ```
 
-10.  Install the AzFilesHybrid module.
+10.  Install the AzFilesHybrid module. Select **Run Once** on **Security warning** popup.
 
-    ```
-    .\CopyToPSPath.ps1
-    ```
+```
+.\CopyToPSPath.ps1
 
-11. Import the AzFilesHybrid module.
+```
+
+11. Import the AzFilesHybrid module. Select **Run Once** on **Security warning** popup and select **Yes to All** on **Install updated version of PowerShellGet** popup.
 
     ```  
     Import-Module -Name AzFilesHybrid
@@ -549,7 +550,9 @@ In this task, you will be completing the steps on the Domain Controller in Azure
 
     ![This image shows that after running these commands, the results will look like this screenshot.](images/azimportresults.png "Command results")
     
-12. Sign in with an account that meets the prerequisites.
+12. Sign in with your account using the credentials given below:
+  * Username: **<inject key="AzureAdUserEmail" />**
+  * Password: **<inject key="AzureAdUserPassword" />**
 
     ```
     Connect-AzAccount
@@ -559,70 +562,63 @@ In this task, you will be completing the steps on the Domain Controller in Azure
     
 
         ```
-        $SubscriptionId = "\<subscription-id\>\"
-        $ResourceGroupName = "\<resource-group-name\>\"
-        $StorageAccountName = "\<storage-account-name\>\"
+        $SubscriptionId = "<inject key="Subscription ID" />"
+        $ResourceGroupName = "AVD-RG"
+        $StorageAccountName = "<inject key="Storage Account Name" />"
         ```
 
+   ![](media/variables.png)
 
-
-        >**Note**: The Resource Group Name and Storage Account Name were assigned in Task 1.
-
-        >**Note**: You can run **Get-AzSubscription** to lookup the available subscription names.
-
-        ![This image shows where you would find the subscription Id when running the Get-AzSubscription command.](images/subscriptionid.png "Subscription Id")
-
-
-13.  Select the target subscription for the current session.
+14.  Select the target subscription for the current session.
   
 
-        ```
-        Select-AzSubscription -SubscriptionId $SubscriptionId
+    ```
+    Select-AzSubscription -SubscriptionId $SubscriptionId
         ```
 
-14. Register the storage account with your Active Directory domain.
+15. Register the storage account with your Active Directory domain. Select **Run Once** on **Security warning** popup.
 
     ```
     Join-AzStorageAccount -ResourceGroupName $ResourceGroupName
    
     ```
 
-    >**Note**: You will be prompted to enter the Azure storage account name after you run this command.  The prompt will look like the screenshot below.
+16. You will be prompted to enter the Azure storage account name, then enter your storage account name **<inject key="Storage Account Name" />** .
 
-    ![This image shows the prompt to enter the Azure storage account after running the join command.](images/enterstorage.png)
+    ![This image shows the prompt to enter the Azure storage account after running the join command.](media/enterstorage.png)
 
-15. When the script completes, you will be provided with confirmation that you are connected to the storage account.
+17. When the script completes, you will be provided with confirmation that you are connected to the storage account.
 
-    ![This image shows the confirmation of the storage account connection.](images/storageconfirmed.png "Storage account confirmation")
+    ![This image shows the confirmation of the storage account connection.](media/storageconfirmed.png "Storage account confirmation")
 
-16. Confirm the object was created successfully in **Active Directory Users and Computers** by going to Domain controllers and looking for the computer object for Azure storage account.
+18. Confirm the object was created successfully in **Active Directory Users and Computers** by going to Domain controllers and looking for the computer object for Azure storage account.
 
-    ![This image is what the newly created computer object looks like in Active Directory.](images/confirmnewobject.png "Active Directory object")
+    ![This image is what the newly created computer object looks like in Active Directory.](media/confirmnewobject.png "Active Directory object")
 
-17. Confirm that the feature is enabled.
+19. Confirm that the feature is enabled.
 
-        ```
-        $storageaccount = Get-AzStorageAccount -ResourceGroupName $ResourceGroupName -Name $StorageAccountName
-        ```
+    ```
+    $storageaccount = Get-AzStorageAccount -ResourceGroupName $ResourceGroupName -Name $StorageAccountName
+    ```
 
-18.  List the directory service of the selected service account.
+20.  List the directory service of the selected service account.
  
-        ```
-        $storageAccount.AzureFilesIdentityBasedAuth.DirectoryServiceOptions
-        ```
+    ```
+    $storageAccount.AzureFilesIdentityBasedAuth.DirectoryServiceOptions
+    ```
 
-19. List the directory domain information if the storage account has enabled AD authentication for file shares.
+21. List the directory domain information if the storage account has enabled AD authentication for file shares.
 
     ```
     $storageAccount.AzureFilesIdentityBasedAuth.ActiveDirectoryProperties
     ```
 
-    ![This image is what the responses should be when running the previous PowerShell tasks.](images/confirmpowershell.png "PowerShell task responses")
+    ![This image is what the responses should be when running the previous PowerShell tasks.](media/confirmpowershell.png "PowerShell task responses")
 
 
-20. Confirm activation with your domain by navigating to the Azure portal, going to the storage account and selecting **Configuration** under **Settings**. Refer to the group on Active Directory (AD), as shown in the example below.
+22. Now to confirm activation with your domain by, in the Azure portal, go to the storage account and select **Configuration** under **Settings**. The **Active Directory Domain Services (AD DS)** configuration should be **Enabled**.
 
-    ![This image shows how in the storage account configuration, that Active Directory Domain Services is enabled.](images/portalconfirm.png "Storage account configuration")
+    ![This image shows how in the storage account configuration, that Active Directory Domain Services is enabled.](media/portalconfirm.png "Storage account configuration")
 
 You have now successfully enabled AD authentication over SMB and assigned a custom role that provides access to an Azure file share with an AD identity.
 
@@ -640,87 +636,89 @@ To access Azure Files resources with identity-based authentication, an identity 
 
 To simplify administration, create 4 new security groups in Active Directory to manage share permissions.
 
-1.  From a domain joined computer, open **Active Directory Users and Computers**.
+1.  From the domain joined computer, go to **Local Server** and open **Active Directory Users and Computers** from **Tools**. Then navigate to **contoso.com > Builtin** and select the **Create a new group in the current container** icon. 
 
-    ![This image shows how to open the window on the domain controller VM server manager and go to the Active Directory users and computers to create a new security group.](images/adgroups.png "Create new groups")
+    ![This image shows how to open the window on the domain controller VM server manager and go to the Active Directory users and computers to create a new security group.](media/adgroups.png "Create new groups")
 
 2.  Create the following Active Directory security groups in an OU that is synchronized with Azure AD:
 
     -   **AZF FSLogix Contributor**
 
-        ![This image shows how to create a new group object named AZF FSLogix Contributor.](images/azfcontributor.png "AZF FSLogix Contributor")
+        ![This image shows how to create a new group object named AZF FSLogix Contributor.](media/azfcontributor.png "AZF FSLogix Contributor")
 
     -   **AZF FSLogix Elevated Contributor**
 
-        ![This image shows how to create a new group object named AZF FSLogix Elevated Contributor.](images/azfelevcontributor.png "AZF FSLogix Elevated Contributor")
+        ![This image shows how to create a new group object named AZF FSLogix Elevated Contributor.](media/azfelevcontributor.png "AZF FSLogix Elevated Contributor")
 
     -   **AZF FSLogix Reader**
 
-        ![This image shows how to create a new group object named AZF FSLogix Reader.](images/azfreader.png "AZF FSLogix Reader")
+        ![This image shows how to create a new group object named AZF FSLogix Reader.](media/azfreader.png "AZF FSLogix Reader")
 
     -   **AVD Users**
 
-        ![This image shows how to create a new group object named AVD User.](images/avduser.png "AVD User")
+        ![This image shows how to create a new group object named AVD User.](media/avduser.png "AVD User")
 
 3.  Add the AVD administrative account that you created previously to the group **AZF FSLogix Elevated Contributor**. This account will have permissions to modify file share permissions.
 
-    ![This image shows how to find the AVD admin user that you created previously and right-click to add to a group.](images/chooseadmin.png)
+    ![This image shows how to find the AVD admin user that you created previously and right-click to add to a group.](media/chooseadmin.png)
 
-4.  Type **AZF FSLogix Elevated Contributor** and select **Check Names** to verify. Select **Ok** to save.
+4.  Type **AZF FSLogix Elevated Contributor** and select **Check Names** to verify. Select **OK** to save.
 
-    ![This image shows how to add the AZF FSLogix Elevated Contributor group to this user.](images/addadmin.png)
+    ![This image shows how to add the AZF FSLogix Elevated Contributor group to this user.](media/addadmin.png)
 
-5.  Add the group **AVD Users** to the group **AZF FSLogix Contributor** by going to the Builtin groups, locating AVDUsers and right-click to **Add to a group**.
+5.  Add the group **AVD Users** to the group **AZF FSLogix Contributor**. Go to the **Builtin** groups, locate **AVD Users** and right-click to **Add to a group**.
   
-    ![This shows how you would find the AVD Users group and add it to a group.](images/avduseraddtogroup.png)
+    ![This shows how you would find the AVD Users group and add it to a group.](media/avduseraddtogroup.png)
 
-    ![This image shows where you enter the FSLogix contributor group and check the name before adding.](images/avduseraddgroup.png)
+6. Type **AZF FSLogix Contributor** and select **Check Names** to verify. Select **OK** to save.
 
-6.  Add user accounts to the group **AVD Users** by selecting **OrgUsers** and choosing all the users in the list.  Select all the users and right-click to add them to a group. These users will have access to use FSLogix profiles. Also be sure to add the **ADAdmin** user to these groups.
+    ![This image shows where you enter the FSLogix contributor group and check the name before adding.](media/avduseraddgroup.png)
 
-    ![This image shows the list of users in the organization, select the users and add them to the AVD Users group.](images/avdaddusers.png "Add users to the AVD users group")
+7.  Add user accounts to the **AVD Users** group. Open **OrgUsers**, select all the users and right-click on **Add to a group**. These users will have access to use FSLogix profiles.
 
-7.  Wait for the new groups to synchronize with Azure AD.  These groups can be verified by going to **Groups** within **Azure Active Directory** and looking for the names in the list.
+    ![This image shows the list of users in the organization, select the users and add them to the AVD Users group.](media/avdaddusers1.png "Add users to the AVD users group")
 
-    ![This image shows how to where you would verify that the groups that were created on the domain controller have synchronized with Azure AD.](images/newgroups.png)
+8. Type **AVD Users** and select **Check Names** to verify. Select **OK** to save.
+
+    ![This image shows where you enter the FSLogix contributor group and check the name before adding.](media/avduseraddgroup.png)
+
+9.  Wait for the new groups to synchronize with Azure AD.  These groups can be verified by going to **Groups** within **Azure Active Directory** and looking for the names in the list.
+
+    ![This image shows how to where you would verify that the groups that were created on the domain controller have synchronized with Azure AD.](media/newgroups.png)
 
     With the new security groups available in Azure AD, use the following steps to assign them to your storage account in the Azure portal. This will enable to manage share permissions using AD security groups.
 
-8.  In the Azure portal, in the **Search resources** field, type **storage accounts** and select **Storage accounts** from the list.
+10. In the Azure portal, go to **Storage accounts** and open **<inject key="Storage Account Name" />** . Select **Access Control (IAM) > + Add > Add role assignment**. 
 
-    ![This image shows how to, from the Azure portal, search for storage accounts on the search bar.](images/storageaccount.png "Search for storage accounts")
-
-9.  On the Storage accounts blade, select the Storage account you created in Task 1.
-
-10. On the blade for your storage account, locate and select **File shares**.
-
-11. On the File shares blade, select your file share.
-
-12. Select **Access Control (IAM)**.
-
-13. Select **+ Add** and select **Add role assignment**.
-
-    ![This image shows that, in the storage account, under access control, you will locate and select add under add a role assignment.](images/addroleassign.png "Add Azure AD Role assignment")
+    ![This image shows that, in the storage account, under access control, you will locate and select add under add a role assignment.](media/addroleassign.png "Add Azure AD Role assignment")
 
 14. On the Add role assignment fly out, fill in the following options and select **Save**.
 
     -    **Role**: Storage File Data SMB Share Contributor
 
-    -    **Assign access to**: Azure AD user, group, or service principal
+    -    **Assign access to**: User, group, or service principal
 
     -    **Select**: AZF FSLogix Contributor
 
-    ![This image shows how to add the storage file data SMB share contributor role to the AZF FSLogix contributor role that were created within Active Directory.](images/azureadroleassigncontrib.png "Add FSLogix roles to Azure AD File share")
+    ![This image shows how to add the storage file data SMB share contributor role to the AZF FSLogix contributor role that were created within Active Directory.](media/azureadroleassigncontrib.png "Add FSLogix roles to Azure AD File share")
 
 15. Repeat steps 3-4 for the remaining two roles.
+    
+    -    **Role**: Storage File Data SMB Share Elevated Contributor
 
-    -    Storage File Data SMB Share Elevated Contributor \> AZF FSLogix Elevated Contributor
+    -    **Assign access to**: User, group, or service principal
 
-    ![This image shows how to add the storage file data SMB share elevated contributor role to the AZF FSLogix elevated contributor role that were created within Active Directory.](images/azureadroleassignelev.png "Add FSLogix roles to Azure AD File share")
+    -    **Select**: AZF FSLogix Elevated Contributor
 
-    -    Storage File Data SMB Share Reader \> AZF FSLogix Reader
+    ![This image shows how to add the storage file data SMB share elevated contributor role to the AZF FSLogix elevated contributor role that were created within Active Directory.](media/azureadroleassignelev.png "Add FSLogix roles to Azure AD File share")
 
-    ![This image shows how to add the storage file data SMB share reader role to the AZF FSLogix Reader role that were created within Active Directory.](images/azureadroleassignreader.png "Add FSLogix roles to Azure AD File share")
+    -    **Role**: Storage File Data SMB Share Reader
+
+    -    **Assign access to**: User, group, or service principal
+
+    -    **Select**: AZF FSLogix Reader  
+
+    ![This image shows how to add the storage file data SMB share reader role to the AZF FSLogix Reader role that were created within Active Directory.](media/azureadroleassignreader.png "Add FSLogix roles to Azure AD File share")
 
 ### Task 5: Configure NTFS permissions for the file share
 
