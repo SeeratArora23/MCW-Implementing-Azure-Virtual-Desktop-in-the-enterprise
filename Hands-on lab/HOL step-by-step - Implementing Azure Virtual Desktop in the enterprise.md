@@ -422,11 +422,11 @@ Before you can work with an Azure file share, you need to create an Azure storag
 
     ![This image shows how to access the search menu bar, and search for storage accounts.](media/storageaccount.png "Search for storage accounts")
 
-3.  On the Storage Accounts window that appears, select **+ Add**.
+2.  On the Storage Accounts window that appears, select **+ Add**.
 
     ![This image shows how to select the Add icon to create a new storage account.](media/addstorageaccount.png "Add a storage account")
 
-4.  Fill in the required parameters for the storage account as given below:
+3.  Fill in the required parameters for the storage account as given below:
 
   - Subscription: *Select the default subscription*. 
    
@@ -442,21 +442,21 @@ Before you can work with an Azure file share, you need to create an Azure storag
    
   - Click on **Review + Create**
 
-    ![This image shows how to enter the information to create a new storage account.](media/createstorageaccount.png "Create a storage account")
+    ![This image shows how to enter the information to create a new storage account.](media/createstorage1.png "Create a storage account")
 
-5.  At last, Select **Create**.
+4. At last, Select **Create**.
 
     ![This image shows how to enter the information to create a new storage account.](media/reviewcreate.png "Create a storage account")
 
-6.Once the deployment is ready, select **Go to resource**. This will take you to the storage account you just created.
+5. Once the deployment is ready, select **Go to resource**. This will take you to the storage account you just created.
 
-   ![This image shows how to enter the information to create a new storage account.](media/gotoresource.png "Create a storage account")
+   ![This image shows how to enter the information to create a new storage account.](media/gotoresource1.png "Create a storage account")
 
 ### Task 2: Create an Azure file share 
 
 1.  On the **storage accounts** page, select **File shares** and select **+ File Share**.
 
-    ![This image shows that once the storage account is created, from the overview blade, to select File shares.](media/storagefileshare.png "Create a File share")
+    ![This image shows that once the storage account is created, from the overview blade, to select File shares.](media/storagefileshare1.png "Create a File share")
 
 2.  Enter a Name for the new file share, enter a quota in gigabits, select **Hot** Tier, and select **Create**.
 
