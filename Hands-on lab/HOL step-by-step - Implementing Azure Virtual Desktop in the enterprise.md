@@ -206,32 +206,37 @@ By default, Azure AD Connect does not synchronize the built-in domain administra
 
 1.  In Server Manager, select **Tools** in the upper right corner and select **Active Directory Users and Computers**.
 
-    ![This image shows how to find Tools on the upper right corner to access the Server Manager Tools.](images/serverMangerTools.png "Server Manager Tools") 
+    ![This image shows how to find Tools on the upper right corner to access the Server Manager Tools.](media/serverMangerTools.png "Server Manager Tools") 
 
 2.  In Active Directory Users and Computers, right-click the **Users** organization unit and select **New \> User** from the menu.
 
-    ![In this image, you find the folder path for users, and right-click to add a new user.](images/newUser.png "Folder path for new user") 
+    ![In this image, you find the folder path for users, and right-click to add a new user.](media/newUser.png "Folder path for new user") 
 
 3.  Complete the New User wizard.
 
-    ![This image shows the window that will open with the fields to complete for a new user.](images/newuserobject.png "Create a new user")
+    ![This image shows the window that will open with the fields to complete for a new user.](media/newuserobject.png "Create a new user")
 
-    ![This image is the next window that will allow you to assign a password.](images/newUserWizard.png "New User Wizard window") 
+    ![This image is the next window that will allow you to assign a password.](media/newUserWizard.png "New User Wizard window") 
 
-    ![This image shows the final screen of the wizard will allow you to review and finish the new user setup.](images/finishnewuser.png "Finish new user setup")
+    ![This image shows the final screen of the wizard will allow you to review and finish the new user setup.](media/finishnewuser.png "Finish new user setup")
 
     >**Note**: This account will be important in future tasks. Make a note of the username and password you create. When setting the password, uncheck the box **User must change password at next logon**.
 
-4.  In Active Directory Users and Computers, right-click on the new user account object and select **Add to a group**.
+4. In Active Directory Users and Computers, double-click on **Users** and scroll down to the new user **wvd admin**.
 
-    ![This image shows when the new user is created, we will find that username and right-click to add the user to a group.](images/addusertogroup.png "Add new user to a group")
+    ![](media/userwvdadmin.png "Add new user to a group")
 
-5.  On the Select Groups dialog window, type **Domain Admins** and select **OK**.
-   
-    >**Note**: This account will be used during the host pool creation process for joining the hosts to the domain. Granting Domain Admin permissions will simplify the lab. However, any Active Directory account that has the following permissions will suffice. This can be done using [Active Directory Delegate Control](https://danielengberg.com/domain-join-permissions-delegate-active-directory/). 
+5.  Now right-click on the **wvd admin** user account and select **Add to a group**.
 
-    ![This image shows how we will add this user to the Domain Admins group.](images/addusertodomainadmins.png "Add user to Domain Admins group")
+    ![This image shows when the new user is created, we will find that username and right-click to add the user to a group.](media/addusertogroup.png "Add new user to a group")
 
+6.  On the Select Groups dialog window, type **Domain Admins**, then select **Check Names** and select **OK**.
+
+    ![This image shows how we will add this user to the Domain Admins group.](media/addusertodomainadmins.png "Add user to Domain Admins group")
+
+> **Note**: This account will be used during the host pool creation process for joining the hosts to the domain. Granting Domain Admin permissions will simplify the lab. However, any Active Directory account that has the following permissions will suffice. This can be done using [Active Directory Delegate Control](https://danielengberg.com/domain-join-permissions-delegate-active-directory/). 
+ 
+ 
 ### Task 4: Configuring Azure AD Connect
 
 1.  On the desktop of the domain controller, locate the icon for **Azure AD Connect** and open it.
