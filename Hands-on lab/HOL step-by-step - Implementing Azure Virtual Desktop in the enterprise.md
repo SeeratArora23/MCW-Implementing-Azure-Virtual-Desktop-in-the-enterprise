@@ -323,7 +323,7 @@ It is also important to keep in mind that these groups can also originate from t
 
 1.  In the Azure portal, navigate to **Azure Active Directory** select **Groups** from the left pane.
 
-    ![](media/newgroup1.png "Add user to Domain Admins group")
+    ![](media/newgroup11.png "Add user to Domain Admins group")
 
 2.  On Groups page, select **+ New group**.
 
