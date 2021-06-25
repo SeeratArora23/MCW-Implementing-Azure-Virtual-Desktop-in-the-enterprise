@@ -728,19 +728,18 @@ Azure Files supports the full set of NTFS basic and advanced permissions. You ca
 
 The first time you configure NTFS permission, do so using superuser permissions. This is accomplished by mounting the file share using your storage account key.
 
->**Note**: To complete this task, you will need to disable secure transfer in the storage account.  This can be accessed from the storage account **Configuration** and selecting **Disabled** under **Secure transfer required**.  Select **Save** to save the changes.
+1. Firstly, you will need to disable secure transfer in the storage account.  Navigate to the storage account and select **Configuration**. Then select **Disabled** under **Secure transfer required** and at last, select **Save** to save the changes.
 
-![This image shows how, within the configuration, you will disable secure transfer required and save.](images/disablesecuretransfer.png)
+    ![This image shows how, within the configuration, you will disable secure transfer required and save.](media/disablesecuretransfer.png)
 
-1.  In the Azure portal, in the **Search resources** field, type **storage accounts** and select **Storage accounts** from the list.
+2. Now select **File shares** given in the left pane, under **Data Storage** and open the file share you created earlier.
 
-2.  On the Storage accounts blade, select the Storage account you created in Task 1.
+    ![This image shows how, within the configuration, you will disable secure transfer required and save.](media/openfs.png)
 
-3.  On the blade for the file share within your storage account, under **Settings**, select **Properties**. Locate the **URL** address. This is the path you will use to access your file share. 
 
-    ![This image shows how to use the storage account properties blade to find the storage account path.](images/storagefileendpoint.png)
+3.  On the file share page, under **Settings**, select **Properties**. Locate the **URL** address and click on copy icon to copy it and paste it in a txt editor for further use. This is the path you will use to access your file share. 
 
->**Note**: The base URL is also available under the **Properties** of the storage account itself under the **File service** entry.  
+    ![This image shows how to use the storage account properties blade to find the storage account path.](media/storagefileendpoint.png)
 
 4.  Reformat the path to UNC and copy it to a notepad file. For example:
 
@@ -751,37 +750,53 @@ The first time you configure NTFS permission, do so using superuser permissions.
 
 5.  On the blade for your storage account, under **Settings**, select **Access keys**. Copy and paste the value for **key1** to the same notepad file.
 
-    ![Here is the location of the storage account key to copy to the notepad.](images/copykey.png)
+    ![Here is the location of the storage account key to copy to the notepad.](media/copykey.png)
 
-6.  From a domain joined computer, open a standard command prompt and mount your file share using the storage account key. **Do not** use an elevated command prompt or the mount point will not be visible in File Explorer. 
+6.  From a domain joined computer, open a standard **Command Prompt** and mount your file share using the storage account key. **Do not** use an elevated command prompt or the mount point will not be visible in File Explorer. 
 
-    ![This image shows where to go to the search on Windows to find and open the Command prompt.](images/opencommandprompt.png)
-     
-    >**Note**: Refer to the following examples to prepare your command. Be sure to enter spaces where (space) is noted:
-    net use z:(space) \\\\\<storage-account-name\>.file.core.windows.net\\\<share-name>(space) <storage-account-key\>(space) /user:Azure\\\<storage-account-name\>
+7. Run the command given below. Refer to the following format for your command and be sure to enter spaces where (space) is noted:
 
-        Example with sample values:
-                
-        net use z: \\mydomainazfiles.file.core.windows.net\FSLogix uPCvi+gP2qbCQcn3EATgbALE0H8nxhspyLRO2Nf9Hm2gMxfn/389/M33XHh7YEqNJ2GhbJXgStiifPwMBXk38Q== user:Azure\\mydomainazfiles
-        
+    ```
+    net use z:(space) \\<storage-account-name>.file.core.windows.net\<share-name>(space) <storage-account-key>(space) /user:Azure\<storage-account-name>
+    ```
 
-    ![This image shows how to, from the command prompt, run the script list above to connect the storage account as a network drive.](images/cmdprompt.png "Command Prompt script for mapping drive")
+    ![This image shows where to go to the search on Windows to find and open the Command prompt.](media/opencommandprompt.png)
 
-    >**Note**: This is an SMB connection on port 445. Most consumer ISPs block this port by default. when you are doing this in your lab and experience issues mounting the share from a local computer, try connecting from a domain joined VM in Azure.
+>**Note**: This is an SMB connection on port 445. Most consumer ISPs block this port by default. when you are doing this in your lab and experience issues mounting the share from a local computer, try connecting from a domain joined VM in Azure.
 
-    ![This image shows how to, after the net use command is completed successfully, you will receive a prompt that it was completed successfully.  You will also be able to see the drive as a network location in file explorer.](images/successfulstoragemap.png)
 
-7.  Open **File Explorer**, right-click on the **Z:** drive and select **Properties**.
+8.  Open **File Explorer**, locate the **Z:** drive. Right-click on the drive and select **Properties**.
 
-8.  On the properties window, select the **Security** tab and select **Advanced**.
+    ![](media/successfulstoragemap.png)
 
-    ![This image shows how to, in the properties for the drive, select the security folder and select advanced.](images/drivesecurity.png)
+9.  On the properties window, select the **Security** tab and select **Advanced**.
 
-9.  Select **Add** and add each of the AD security groups you created in Task 4 with the appropriate permissions.  Select check names as each is entered to verify the connection.
+    ![This image shows how to, in the properties for the drive, select the security folder and select advanced.](media/drivesecurity.png)
 
-    ![This image shows how to select add in security settings to add new objects.](images/addsecurity.png)
+10.  Select **Add** on **Advanced Security Settings** page.
 
-    >**Note**: The images show all the objects that need to be added but only one can be added at a time.  Add one and then repeat the process until all four are added.
+   ![](media/add1.png)
+
+11. Enter the name of your group that are listed below then select **Check Names >OK > OK**(present in the bottom):
+
+  * **AZF FSLogix Contributor**
+
+   ![](media/add2.png)
+
+  * **AZF FSLogix Elevated Contributor**
+
+   ![](media/add3.png)
+
+  * **AZF FSLogix Reader**
+
+   ![](media/add4.png)
+
+  * **AVD Users**
+
+   ![](media/add5.png)
+
+> **Note**: Only one group can be added at a time, so add one and then repeat the process until all four are added.
+
 
     | AD Group | NTFS Permissions |
     |----------|------------------|
@@ -790,12 +805,9 @@ The first time you configure NTFS permission, do so using superuser permissions.
     | **AZF FSLogix Reader** | Read & execute |
     | **AVD Users** | Modify (This folder only) |
 
-10. Select **OK** to save your changes.
+12. Select **OK** to save your changes.
 
-    ![This image shows how to choose select a principal to open the select user, computer, service account, or group window.  In the enter the object name window, enter the FSLogix groups that were created previously.  Check names and select ok.](images/addobjects.png)
-
-    ![This image shows how that after adding all four objects as principals, they will be in the list of permission entries.](images/addsecuritycomplete.png)
-
+   ![This image shows how to select add in security settings to add new objects.](media/addsecurity.png)
 
 
 ### Task 6: Configure NTFS permissions for the containers
@@ -806,17 +818,15 @@ In this task we will create directories for each of the FSLogix profile types an
 
 1.  Navigate to the networked drive in File explorer.
 
-    ![This is an image of where you will find the network drive that you mounted in the previous task.](images/networkdrive.png)
+    ![This is an image of where you will find the network drive that you mounted in the previous task.](media/networkdrive.png)
 
-2.  Create three new folder directories in the root share.
+2.  Create three new folder directories in the root share as give below:
 
-    -    **Profiles**
+  * **Profiles**
+  * **ODFC**
+  * **MSIX**
 
-    -    **ODFC**
-
-    -    **MSIX**
-
-    ![This image shows that after adding these folders, file explorer for that shared drive will look like this.](images/newfolders.png)
+    ![This image shows that after adding these folders, file explorer for that shared drive will look like this.](media/newfolders.png)
 
 3.  Right-click on the **Profiles** directory and select **Properties**.
 
