@@ -828,9 +828,13 @@ In this task we will create directories for each of the FSLogix profile types an
 
     ![This image shows that after adding these folders, file explorer for that shared drive will look like this.](media/newfolders.png)
 
-3.  Right-click on the **Profiles** directory and select **Properties**.
+3.  Right-click on the **Profiles** folder directory and select **Properties**. 
+
+    ![This image shows that after adding these folders, file explorer for that shared drive will look like this.](media/profileprop.png)
 
 4.  On the properties window, select the **Security** tab and select **Advanced**.
+
+    ![This image shows that after adding these folders, file explorer for that shared drive will look like this.](media/security1.png)
 
 5.  Select **Disable inheritance** and select **Remove all inherited permissions from this object**.
 
