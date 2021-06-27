@@ -842,7 +842,7 @@ In this task we will create directories for each of the FSLogix profile types an
 
 6.  Select **Add** and then select **Select a principal**.
 
-    ![](media/selectprin.png)
+      ![](media/selectprin.png)
 
 7. Add **AZF FSLogix Elevated Contributor** group and select **Check Names** then select **OK**.
     
