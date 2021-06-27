@@ -838,55 +838,85 @@ In this task we will create directories for each of the FSLogix profile types an
 
 5.  Select **Disable inheritance** and select **Remove all inherited permissions from this object**.
 
-    ![This image is the screen that you would remove the inherited permissions.](images/removeinheritedperm.png)
+    ![This image is the screen that you would remove the inherited permissions.](media/removeinheritedperm.png)
 
-6.  Select **Add** and add **AZF FSLogix Elevated Contributor**. Grant **Full Control** and check **Only apply these permissions to objects and/or containers within this container**. Select **OK**.
+6.  Select **Add** and then select **Select a principal**.
 
-    ![This image shows the selections that should be complete before selecting ok.](images/addfullcontrol.png)
+    ![](media/selectprin.png)
 
-7.  Select **Add** and add **Creator owner**. Grant **Full Control** to **Only apply these permissions to objects and/or containers within this container**. Select **OK**.
+7. Add **AZF FSLogix Elevated Contributor** group and select **Check Names** then select **OK**.
+    
+    ![](media/addgroup.png)
 
-    ![This image shows how the add the creator owner object.](images/addcreatorowner.png)
+8. Grant **Full Control** by selecting the **Full Control** check box and check **Only apply these permissions to objects and/or containers within this container**, then Select **OK**.
 
-    ![This image shows how to set the permissions for full control to the creator owner.](images/addfullcontrolcreator.png)
+    ![This image shows the selections that should be complete before selecting ok.](media/addfullcontrol.png)
 
-8.  Select **Add** and add **AVD Users**. Grant the following special permissions to **Only apply these permissions to objects and/or containers within this container**. Select **OK**.
+9.  Select **Add** and then select **Select a principal**. Add **Create Owner** group and select **Check Names** then select **OK**.
 
-    -   Traverse folder / execute file
+    ![](media/addcreatorowner.png)
 
-    -   List folder / read data
+10. Grant **Full Control** by selecting the **Full Control** check box and check **Only apply these permissions to objects and/or containers within this container**, then Select **OK**.
 
-    -   Read attributes
+    ![This image shows the selections that should be complete before selecting ok.](media/addfullcontrolcreator.png)
 
-    -   Create folders / append data
+11. Select **Add** and then select **Select a principal**. Add **AVD Users** and select **Check Names** then select **OK**.
 
-    ![This image shows the special permissions for AVD user.](images/userfolderpermissions.png)
+    ![](media/avduseradd.png)
 
-9.  Select **OK** on both property windows to apply your changes.
+12. Select **Show advanced permissions** and grant the following special permissions to **Only apply these permissions to objects and/or containers within this container** and then select **OK**. 
 
-    ![This image shows the list of permission objects that were just created.](images/permissionscomplete.png)
+  * Traverse folder / execute file
+  * List folder / read data
+  * Read attributes
+  * Create folders / append data
 
-10. Repeat steps 3-9 for the **ODFC** directory.
+    ![This image shows the special permissions for AVD user.](media/userfolderpermissions.png)
 
-11. Right-click on the **MSIX** directory and select **Properties**.
+13.  Select **OK** on both property windows to apply your changes.
 
-12. On the properties window, select the **Security** tab and select **Advanced**.
+   ![This image shows the list of permission objects that were just created.](media/permissionscomplete.png)
 
-13. Select **Disable inheritance** and select **Remove all inherited permissions from this object**.
+14. Repeat steps 3-12 for the **ODFC** directory.
 
-    ![This image is the screen that you would remove the inherited permissions.](images/removeinheritedperm.png)
+15. Once done, then right-click on the **MSIX** directory and select **Properties**. 
 
-14. Select **Add** and add **AZF FSLogix Elevated Contributor**. Grant **Full Control** to **Only apply these permissions to objects and/or containers within this container**. Select **OK**.
+    ![](media/msixprop.png)
 
-    ![This image shows the selections that should be complete before selecting ok.](images/addfullcontrol.png)
+16. On the properties window, select the **Security** tab and select **Advanced**.
 
-15. Select **Add** and add **AVD Users**. Grant **Read & execute** to **Only apply these permissions to objects and/or containers within this container**. Select **OK**.
+17. Select **Disable inheritance** and select **Remove all inherited permissions from this object**.
 
-    ![This image shows the custom permissions for the AVD users on the MSIX folder.](images/msixavdusers.png)
+    ![This image is the screen that you would remove the inherited permissions.](media/removeinheritedperm.png)
 
-16. Confirm your permissions match the screenshots below.
+18.  Select **Add** and then select **Select a principal**.
 
-17. Select **OK** on both property windows to apply your changes.
+    ![](media/selectprin.png)
+
+19. Add **AZF FSLogix Elevated Contributor** group and select **Check Names** then select **OK**.
+    
+    ![](media/addgroup.png)
+
+20. Grant **Full Control** by selecting the **Full Control** check box and check **Only apply these permissions to objects and/or containers within this container**, then Select **OK**.
+
+    ![This image shows the selections that should be complete before selecting ok.](media/addfullcontrol.png)
+
+21. Select **Add** and then select **Select a principal**. Add **AVD Users** and select **Check Names** then select **OK**.
+
+    ![](media/avduseradd.png)
+
+22. Select **Show advanced permissions** and grant the following special permissions to **Only apply these permissions to objects and/or containers within this container** and then select **OK**. 
+
+  * Traverse folder / execute file
+  * List folder / read data
+  * Read attributes
+  * Create folders / append data
+
+    ![This image shows the special permissions for AVD user.](media/userfolderpermissions.png)
+
+23. Select **OK** on both property windows to apply your changes.
+
+   ![This image shows the list of permission objects that were just created.](media/permissionscomplete.png)
 
 Your Azure Files Share is now ready for FSLogix profile containers. Copy the UNC path and add it to your FSLogix deployment (image, GPO, etc.).
 
