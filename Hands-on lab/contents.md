@@ -81,3 +81,6 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 1: Delete Resource groups to remove lab environment](#task-1-delete-resource-groups-to-remove-lab-environment)
 
 <!-- /TOC -->
+
+
+Click on the **Next** button present in the bottom-right corner of this lab guide.
